@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hesaplama Sayfası</title>
+  <style>
+    body {
+      background-color: #ffe6f0; /* pastel pembe arka plan */
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      color: #d63384;
+      margin-bottom: 30px;
+    }
+    input, button {
+      padding: 12px 20px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff3385;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #333;
+    }
+    .back-button {
+      margin-top: 50px;
+      text-decoration: none;
+      color: #d63384;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mini Hesap Makinesi</h1>
+  <input type="number" id="num1" placeholder="Bir sayı gir">
+  <input type="number" id="num2" placeholder="Bir sayı daha gir">
+  <br>
+  <button onclick="hesapla('+')">Topla</button>
+  <button onclick="hesapla('-')">Çıkar</button>
+  <button onclick="hesapla('*')">Çarp</button>
+  <button onclick="hesapla('/')">Böl</button>
+  <div id="result"></div>
+  <a class="back-button" href="gallery.html">← Galeriye Dön</a>
+
+  <script>
+    function hesapla(islem) {
+      const n1 = parseFloat(document.getElementById('num1').value);
+      const n2 = parseFloat(document.getElementById('num2').value);
+      let sonuc = '';
+
+      if (isNaN(n1) || isNaN(n2)) {
+        sonuc = 'Lütfen iki geçerli sayı girin!';
+      } else {
+        switch (islem) {
+          case '+': sonuc = n1 + n2; break;
+          case '-': sonuc = n1 - n2; break;
+          case '*': sonuc = n1 * n2; break;
+          case '/': 
+            if (n2 === 0) {
+              sonuc = '0\'a bölünemez!';
+            } else {
+              sonuc = n1 / n2;
+            }
+            break;
+        }
+      }
+
+      document.getElementById('result').innerText = 'Sonuç: ' + sonuc;
+    }
+  </script>
+</body>
+</html>
+

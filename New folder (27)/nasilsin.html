@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nasılsın?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f0f0, #fafafa);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #ffd6e0;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 10;
+    }
+
+    button:hover {
+      background-color: #ffb6c1;
+    }
+
+    #response {
+      margin-top: 10px;
+      font-size: 1.3rem;
+      color: #555;
+      max-width: 300px;
+      min-height: 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Kalp animasyonu */
+    .heart {
+      position: absolute;
+      bottom: 0;
+      font-size: 24px;
+      animation-name: yukari;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+      user-select: none;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    @keyframes yukari {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Nasılsın?</h1>
+  <div class="buttons">
+    <button onclick="showResponse('iyi')">İyi</button>
+    <button onclick="showResponse('kötü')">Kötü</button>
+    <button onclick="showResponse('ozel')">Benim demek istediğim bir şey var</button>
+    <button onclick="goGallery()">Galeriye Dön</button>
+  </div>
+  <div id="response"></div>
+
+  <script>
+    const responses = {
+      iyi: [
+        "Bu güzel. Umarım hep böyle devam eder.",
+        "Mutlu olman harika bazen etrafında olan insanlarda bunu görüb mutlu olur.",
+        "Senin gibi birinin iyi olması güzel bir haber."
+      ],
+      kötü: [
+        "İstediğin zaman anlata bilirsin.",
+        "Bazen kötü hissetmek de insanca. Geçecek.",
+        "Yalnız değilsin, unutma."
+      ],
+      ozel: [
+        "Aramız eskisi gibi değil ve her gün naslsın diye sormak isterdim. Ama sen istemezsin bende bunu yaptım."
+      ]
+    };
+
+    function showResponse(choice) {
+      const response = document.getElementById("response");
+      const messages = responses[choice];
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      response.textContent = messages[randomIndex];
+
+      if (choice === "iyi") {
+        createHearts();
+      }
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.textContent = '❤️';
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.animationDuration = (2 + Math.random() * 3) + 's';
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+
+    function goGallery() {
+      // Galeri sayfanın ismini buraya yaz, örn: galeri.html
+      window.location.href = "gallery.html";
+    }
+  </script>
+</body>
+</html>
